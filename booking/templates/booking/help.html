@@ -1,0 +1,173 @@
+
+{% load static %}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Service</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<style>
+    /* Global Styles */
+    body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #f8f9fa;
+    }
+
+    /* Navigation Bar */
+    nav {
+        background: #007bff;
+        color: white;
+        padding: 15px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+        font-size: 26px;
+        font-weight: bold;
+    }
+
+    nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    nav ul li {
+        display: inline;
+        margin: 0 15px;
+    }
+
+    nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+        transition: 0.3s;
+    }
+
+    nav ul li a:hover {
+        text-decoration: underline;
+    }
+
+   
+    .user-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    /* Content Container */
+    .container {
+        width: 80%;
+        margin: 50px auto 120px auto;
+        padding: 30px;
+        background: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    h1 {
+        text-align: center;
+        color: #d9534f;
+    }
+
+    h2 {
+        color: #5bc0de;
+    }
+
+    p {
+        line-height: 1.8;
+        font-size: 16px;
+    }
+
+    ul {
+        margin-left: 20px;
+    }
+
+    /* Footer */
+    .footer {
+        background: #007bff;
+        color: white;
+        text-align: center;
+        padding: 15px;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        font-size: 16px;
+    }
+    .footer p {
+        color: white;
+    }
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav>
+    <div class="logo">Amigo Travels</div>
+    <ul>
+        <li><a href="{% url 'booking:dashboard' %}"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="{% url 'booking:booking' %}"><i class="fas fa-ticket-alt"></i> Book Ticket</a></li>
+        <li><a href="{% url 'booking:logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+    </ul>
+</nav>
+
+<!-- Terms of Service Content -->
+<div class="container">
+    <h1>Help Center</h1>
+    <p>Welcome to the Amigo Bus Travel Help Center. Here, you can find answers to common questions, get support, and learn more about our services.</p>
+
+    <h2>1. Booking & Reservations</h2>
+    <p>Need help booking a ticket? Follow these steps:</p>
+    <ul>
+        <li>Visit our website and enter your travel details.</li>
+        <li>Select your preferred bus and seat.</li>
+        <li>Proceed to checkout and complete payment securely.</li>
+        <li>Receive your e-ticket via email.</li>
+    </ul>
+
+    <h2>2. Payment & Refunds</h2>
+    <p>We offer secure payment options, including credit/debit cards and digital wallets. Refund policies include:</p>
+    <ul>
+        <li>Full refund for cancellations made 24 hours before departure.</li>
+        <li>Partial refund for cancellations within 24 hours.</li>
+        <li>No refund for missed departures.</li>
+    </ul>
+
+    <h2>3. Travel Guidelines</h2>
+    <p>To ensure a smooth journey, please adhere to our travel policies:</p>
+    <ul>
+        <li>Arrive at the boarding point at least 30 minutes before departure.</li>
+        <li>Carry a valid ID for verification.</li>
+        <li>Follow safety protocols onboard.</li>
+    </ul>
+
+    <h2>4. Luggage Policy</h2>
+    <p>Passengers are allowed:</p>
+    <ul>
+        <li>One carry-on bag and one checked-in bag (weight limits apply).</li>
+        <li>Additional baggage may incur extra charges.</li>
+    </ul>
+
+    <h2>5. Customer Support</h2>
+    <p>For any inquiries or assistance, contact us at:</p>
+    <ul>
+        <li>Email: <strong>support@amigobus.com</strong></li>
+        <li>Phone: <strong>+1 800-555-1234</strong></li>
+        <li>Live Chat: Available on our website</li>
+    </ul>
+</div>
+
+
+
+<!-- Footer -->
+<footer class="footer">
+    <p>&copy; 2025 Amigo Travels. All Rights Reserved.</p>
+</footer>   
+
+</body>
+</html>

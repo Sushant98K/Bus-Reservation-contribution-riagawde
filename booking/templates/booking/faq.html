@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f8f9fa;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background: #007bff;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+      
+        .faq-container {
+            max-width: 800px;
+            margin: 3rem auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            
+            
+
+        }
+        .faq-container h1 {
+            text-align: center;
+            color: #007bff;
+        }
+        .faq-item {
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            color: #333;
+            transition: 0.3s;
+        }
+        .faq-question:hover {
+            color: #007bff;
+        }
+        .faq-answer {
+            display: none;
+            padding: 10px;
+            font-size: 16px;
+            color: #555;
+        }
+        .faq-item.active .faq-answer {
+            display: block;
+            
+        }
+
+         /* Footer */
+         .footer {
+            background: #007bff;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            font-size: 16px;
+        }
+        .footer p {
+            color: white;
+        }
+    </style>
+
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <div class="logo">Amigo Travels</div>
+        <ul>
+            <li><a href="{% url 'booking:dashboard' %}"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="{% url 'booking:booking' %}"><i class="fas fa-ticket-alt"></i> Book Ticket</a></li>
+            <li><a href="{% url 'booking:logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </nav>
+
+   
+       
+    <div class="faq-container">
+        <h1>Frequently Asked Questions</h1>
+        
+        <div class="faq-item">
+            <button class="faq-question">How do I book a ticket? <span>+</span></button>
+            <div class="faq-answer">
+                <p>You can book a ticket on our website by selecting your route, date, and seat, and then proceeding with payment.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">Can I cancel my ticket? <span>+</span></button>
+            <div class="faq-answer">
+                <p>Yes, cancellations can be made through the 'My Bookings' section on our website. Refund policies apply.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">What payment methods are accepted? <span>+</span></button>
+            <div class="faq-answer">
+                <p>We accept credit/debit cards, UPI, net banking, and wallet payments.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">How will I receive my ticket? <span>+</span></button>
+            <div class="faq-answer">
+                <p>Your e-ticket will be sent to your registered email after payment confirmation.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">What happens if I miss my bus? <span>+</span></button>
+            <div class="faq-answer">
+                <p>Unfortunately, missed buses are non-refundable. Please contact support for assistance.</p>
+            </div>
+        </div>
+    </div>
+
+   
+    
+
+     
+    <footer class="footer">
+        <p>&copy; 2025 Amigo Travels. All Rights Reserved.</p>
+    </footer>   
+
+    <script>
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const faqItem = button.parentElement;
+                faqItem.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>

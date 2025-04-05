@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f8f9fa;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background: #007bff;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main Content */
+        .container {
+            width: 80%;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+            margin-bottom: 10rem;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            color: #333;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 8px;
+        }
+
+        p, ul {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        ul {
+            margin-left: 20px;
+        }
+
+        ul li {
+            margin-bottom: 10px;
+        }
+
+        /* Footer */
+        .footer {
+            background: #007bff;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            font-size: 16px;
+        }
+        .footer p {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <div class="logo">Amigo Travels</div>
+        <ul>
+            <li><a href="{% url 'booking:dashboard' %}"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="{% url 'booking:booking' %}"><i class="fas fa-ticket-alt"></i> Book Ticket</a></li>
+            <li><a href="{% url 'booking:logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </nav>
+
+    <!-- Terms of Service Content -->
+    <div class="container">
+        <h1>Terms of Service</h1>
+        <p>Welcome to our Bus Reservation System. By using our services, you agree to the following terms:</p>
+        
+        <h2>1. Booking & Reservations</h2>
+        <ul>
+            <li>Users must provide accurate personal details while booking tickets.</li>
+            <li>All bookings are subject to seat availability.</li>
+            <li>Once confirmed, ticket modifications are only allowed based on availability and may be subject to additional charges.</li>
+            <li>Duplicate bookings for the same route and time will not be refunded.</li>
+        </ul>
+    
+        <h2>2. Payment & Refund Policy</h2>
+        <ul>
+            <li>Tickets are non-refundable after confirmation unless stated otherwise.</li>
+            <li>Refunds (if applicable) will be processed within 5-7 business days.</li>
+            <li>We accept payments via credit/debit cards, net banking, UPI, and digital wallets.</li>
+            <li>Chargebacks or disputes raised without prior communication may lead to account suspension.</li>
+        </ul>
+    
+        <h2>3. Cancellations & Delays</h2>
+        <ul>
+            <li>We reserve the right to cancel bookings in case of fraud, technical errors, or unforeseen circumstances.</li>
+            <li>In case of bus cancellations by the company, a full refund or alternative travel options will be provided.</li>
+            <li>Delays due to traffic, weather conditions, or operational issues do not qualify for refunds.</li>
+        </ul>
+    
+        <h2>4. Passenger Responsibilities</h2>
+        <ul>
+            <li>Users should arrive at the bus stop at least 15 minutes before departure.</li>
+            <li>Passengers must carry a valid government-issued ID matching the ticket details.</li>
+            <li>Alcohol, drugs, or any illegal substances are strictly prohibited onboard.</li>
+            <li>Any damage caused to bus property by passengers will be charged accordingly.</li>
+        </ul>
+    
+        <h2>5. Luggage Policy</h2>
+        <ul>
+            <li>Each passenger is allowed one carry-on bag and one checked-in bag (weight limits apply).</li>
+            <li>Oversized or additional luggage may be subject to extra charges.</li>
+            <li>The company is not responsible for lost, stolen, or misplaced items.</li>
+        </ul>
+    
+        <h2>6. Code of Conduct</h2>
+        <ul>
+            <li>Passengers must follow the instructions of the driver and staff at all times.</li>
+            <li>Unruly behavior, harassment, or disturbances to other passengers will lead to removal from the bus without refund.</li>
+            <li>Smoking and consumption of tobacco products are strictly prohibited on board.</li>
+        </ul>
+    
+        <h2>7. Privacy & Data Protection</h2>
+        <ul>
+            <li>Your personal details will be used solely for ticket bookings and customer service purposes.</li>
+            <li>We ensure secure transactions and do not share user information with third parties without consent.</li>
+        </ul>
+    
+        <p>By using our services, you agree to abide by these terms. For any inquiries or concerns, please contact our support team at <strong>support@amigobus.com</strong>.</p>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 Amigo Travels. All Rights Reserved.</p>
+    </footer>   
+
+</body>
+</html>

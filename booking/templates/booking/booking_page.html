@@ -1,0 +1,216 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Ticket</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background: url('{% static "images/main.jpg" %}') no-repeat center center/cover;
+            height: 100vh;
+        
+            justify-content: center;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+            backdrop-filter: blur(6px);
+        }
+        .container-box {
+            max-width: 600px; /* Increased width */
+            background: rgba(255, 255, 255, 0.2);
+            padding: 35px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.7s ease-in-out;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            margin: auto;
+            transform: translateY(5rem);
+            
+        }
+        
+        /* Align labels and inputs side by side */
+        .form-group {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px; /* Spacing between label and input */
+            margin-bottom: 15px;
+        }
+        
+        /* Labels styling */
+        .form-group label {
+            flex: 1;
+            font-weight: 600;
+            color: black;
+            white-space: nowrap;
+        }
+        
+        /* Inputs styling */
+        .form-group .form-control {
+            flex: 2;
+            border-radius: 8px;
+            border: none;
+            padding: 12px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(5px);
+        }
+        
+        /* Placeholder styling */
+        .form-control::placeholder {
+            color: rgba(0, 0, 0, 0.5);
+            font-style: italic;
+        }
+        
+        /* Button */
+        .btn-custom {
+            background: linear-gradient(135deg, #ff7eb3, #ff758c);
+            border: none;
+            padding: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            color: #fff;
+            text-transform: uppercase;
+        }
+        
+        .btn-custom:hover {
+            background: linear-gradient(135deg, #ff5a92, #ff3d72);
+            transform: scale(1.05);
+            box-shadow: 0px 4px 10px rgba(255, 0, 100, 0.4);
+        }
+        
+        /* Responsive: Stack on smaller screens */
+        @media (max-width: 768px) {
+            .form-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        
+            .container-box {
+                max-width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-box">
+        <h2>Book Your Ticket</h2>
+        <form id="ticketForm" method="post" action="{% url 'booking:confirm_booking' %}">
+            {% csrf_token %}
+            
+            {% comment %} <div class="form-group">
+                <label for="from">From</label>
+                <input type="text" class="form-control" id="from" name="from" placeholder="Enter departure city" required>
+            </div> {% endcomment %}
+            <div class="form-group">
+                <label for="from">From</label>
+                <select name="from" id="from" class="form-control" required>
+                    <option value="" disabled selected>Select departure city</option>
+                    {% for city in sources %}
+                        <option value="{{ city.source }}">{{ city.source }} - {{ city.departure_time|date:"h:i A" }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            {% comment %} <div class="form-group">
+                <label for="from">From</label>
+                <select name="from" id="from" class="form-control" required>
+                    <option value="" disabled selected>select departure city</option>
+                    <option value="mumbai">Mumbai - 06:30 AM</option>
+                    <option value="pune">Pune - 08:00 AM</option>
+                    <option value="nashik">Nashik - 09:15 AM</option>
+                    <option value="nagpur">Nagpur - 11:45 AM</option>
+                    <option value="aurangabad">Aurangabad - 01:00 PM</option>
+                    <option value="kolhapur">Kolhapur - 03:30 PM</option>
+                </select>
+            </div> {% endcomment %}
+            
+            <div class="form-group">
+                <label for="to">To</label>
+                <select name="to" id="to" class="form-control" placeholder="Enter destination city" required>
+                    <option value="" disabled selected>Select destination city</option>
+                    {% for city in destinations %}
+                        <option value="{{city.destination}}">{{city.destination}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+    
+            {% comment %} <div class="form-group">
+                <label for="to">To</label>
+                <input type="text" class="form-control" id="to" name="to" placeholder="Enter destination city" required>
+            </div> {% endcomment %}
+    
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input type="date" class="form-control" id="date" name="date" required>
+            </div>
+    
+            <div class="form-group">
+                <label for="passengers">Passengers</label>
+                <div class="col-sm-8">
+                    <input type="number" class="form-control" id="passengers" name="passengers" min="1" placeholder="Number of passengers" required>
+                    <div id="emailHelp" class="form-text">asdasd</div>
+                </div>
+            </div>
+    
+            <div class="form-group">
+                <label for="seatType">Seat Type</label>
+                <select class="form-control" id="seatType" name="seattype" required>
+                    <option value="" disabled selected>Select Seat Type</option>
+                    <option value="Sleeper">Sleeper - ₹200 per ticket</option>
+                    <option value="Semi-Sleeper">Semi-Sleeper - ₹180 per ticket</option>
+                    <option value="Seater">Seater - ₹150 per ticket</option>
+                    <option value="AC Sleeper">AC Sleeper - ₹550 per ticket</option>
+                    <option value="Luxury Recliner">Luxury Recliner - ₹700 per ticket</option>
+                    <option value="Business Class">Business Class – ₹950 per ticket</option>
+                </select>
+            </div>
+    
+            <div class="form-group">
+                <label for="totalAmount">Total Amount</label>
+                <input type="text" class="form-control" id="totalAmount" name="total_amount" readonly>
+            </div>
+    
+            <button type="submit" class="btn btn-custom w-100">Confirm Booking</button>
+        </form>
+    </div>
+    
+
+    <script>
+        // Define prices for each seat type
+        const seatPrices = {
+            'Sleeper': 200,
+            'Semi-Sleeper': 180,
+            'Seater': 150,
+            'AC Sleeper': 550,
+            'Luxury Recliner': 700,
+            'Business Class': 950,
+        };
+
+        // Get references to the form elements
+        const passengersInput = document.getElementById('passengers');
+        const seatTypeSelect = document.getElementById('seatType');
+        const totalAmountInput = document.getElementById('totalAmount');
+
+        // Function to calculate the total amount
+        function calculateTotalAmount() {
+            const passengers = parseInt(passengersInput.value) || 0;
+            const seatType = seatTypeSelect.value;
+            const pricePerTicket = seatPrices[seatType] || 0;
+            const totalAmount = passengers * pricePerTicket;
+            totalAmountInput.value = `₹${totalAmount}`;
+        }
+
+        // Add event listeners to recalculate the total amount
+        passengersInput.addEventListener('input', calculateTotalAmount);
+        seatTypeSelect.addEventListener('change', calculateTotalAmount);
+
+        // Calculate total amount on page load (if values are pre-filled)
+        calculateTotalAmount();
+    </script>
+</body>
+</html>

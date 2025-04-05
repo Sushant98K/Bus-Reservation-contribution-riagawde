@@ -1,0 +1,126 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Payment</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <style>
+        /* Background Styling */
+        body {
+            background: url('{% static "images/main.jpg" %}') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+            backdrop-filter: blur(5px);
+        }
+        /* Main Container */
+        .payment-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+            width: 550px;
+            text-align: center;
+        }
+        /* Payment Header */
+        .payment-header {
+            font-size: 28px;
+            font-weight: bold;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        /* Flight Icon */
+        .flight-icon {
+            width: 80px;
+            margin-bottom: 10px;
+        }
+        /* Payment Details */
+        .payment-details {
+            font-size: 18px;
+            margin: 8px 0;
+            color: #555;
+        }
+        .total-amount {
+            font-size: 22px;
+            font-weight: bold;
+            color: #28a745;
+            border-top: 3px solid #ddd;
+            padding-top: 12px;
+            margin-top: 20px;
+        }
+        /* Pay Now Button */
+        .btn-pay {
+            background: #007bff;
+            color: white;
+            font-weight: bold;
+            border-radius: 6px;
+            padding: 14px;
+            display: block;
+            width: 100%;
+            font-size: 18px;
+            text-transform: uppercase;
+            transition: 0.3s;
+            border: none;
+        }
+        .btn-pay:hover {
+            background: #0056b3;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="payment-container">
+        <img src="https://cdn-icons-png.flaticon.com/512/9794/9794062.png" alt="Bus Icon" class="flight-icon">
+
+        <div class="payment-header">Confirm & Pay</div>
+        
+        <p class="payment-details"><strong>From:</strong> {{ booking_data.from }}</p>
+        <p class="payment-details"><strong>To:</strong> {{ booking_data.to }}</p>
+        <p class="payment-details"><strong>Date:</strong> {{ booking_data.date }}</p>
+        <p class="payment-details"><strong>Passengers:</strong> {{ booking_data.passengers }}</p>
+        <p class="payment-details"><strong>Seat Type:</strong> {{ booking_data.seattype }}</p>
+        <p class="total-amount">Total Amount: ₹{{ booking_data.total_amount }}</p>
+        
+        <button id="rzp-button" class="btn btn-pay">Pay Now</button>
+    </div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+    var options = {
+      key: "{{ razorpay_key_id }}",
+      amount: "{{ booking_data.total_amount }}00",
+      currency: "INR",
+      name: "Your Company Name",
+      description: "Booking Payment",
+      order_id: "{{ razorpay_order_id }}",
+      handler: function (response) {
+        alert("Payment successful! Payment ID: " + response.razorpay_payment_id);
+        window.location.href = "{% url 'booking:payment_success' %}?razorpay_payment_id=" + response.razorpay_payment_id;
+      },
+      prefill: {
+        name: "{{ booking_data.name }}",
+        email: "{{ booking_data.email }}",
+        contact: "{{ booking_data.phone }}",
+      },
+      theme: {
+        color: "#007bff",
+      },
+    };
+  
+    var rzp = new Razorpay(options);
+    document.getElementById("rzp-button").onclick = function (e) {
+      rzp.open();
+      e.preventDefault();
+    };
+</script>
+
+</body>
+</html>

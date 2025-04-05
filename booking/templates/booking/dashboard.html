@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+       
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f4f4;
+   
+    
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #007bff;
+    padding: 15px 30px;
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Left Side (Logo) */
+.nav-left .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+.nav-left .logo i {
+    margin-right: 8px;
+}
+
+/* Contact */
+.nav-center {
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.contact-number {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 6px 12px;
+    border-radius: 5px;
+}
+
+.contact-number a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* Navbar Links */
+.nav-links {
+    display: flex;
+    list-style: none;
+    padding: 0;
+}
+
+.nav-links li {
+    margin-left: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: 0.3s;
+    padding: 8px 12px;
+    border-radius: 5px;
+}
+
+.nav-links a:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Logout Button */
+.logout {
+    background: #ff3b30;
+    padding: 8px 15px;
+    border-radius: 5px;
+}
+
+.logout:hover {
+    background: #d6342c;
+}
+
+/* Mobile Menu */
+.menu-toggle {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background: #007bff;
+        width: 200px;
+        padding: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+    }
+
+    .nav-links.active {
+        display: flex;
+        z-index: 1000;
+    }
+
+    .nav-links li {
+        margin: 10px 0;
+        text-align: center;
+        z-index: 1000;
+    }
+
+    .menu-toggle {
+        display: block;
+        z-index: 1000;
+    }
+}
+
+        
+  /* Dashboard Styling */
+.dashboard-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+    background: url('{% static "images/main.jpg" %}') center/cover no-repeat;
+    text-align: center;
+}
+
+/* Transparent Dashboard Box */
+.dashboard-box {
+    background: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 90%;
+    backdrop-filter: blur(10px); /* Blur background for a frosted-glass effect */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.dashboard-box h1 {
+    font-size: 2rem;
+    color: white;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.welcome-msg {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #f1f1f1;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.dashboard-box p {
+    font-size: 1rem;
+    color: #f1f1f1;
+    margin-bottom: 20px;
+}
+
+/* Stylish Button */
+.book-btn {
+    display: inline-block;
+    background: rgba(0, 123, 255, 0.8);
+    color: white;
+    padding: 12px 20px;
+    font-size: 1rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: 0.3s;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.book-btn i {
+    margin-right: 8px;
+}
+
+.book-btn:hover {
+    background: rgba(0, 86, 179, 0.9);
+    transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .dashboard-box {
+        padding: 30px;
+        max-width: 90%;
+    }
+
+    .dashboard-box h1 {
+        font-size: 1.8rem;
+    }
+
+    .welcome-msg {
+        font-size: 1.1rem;
+    }
+}
+
+/* Footer Styling */
+.footer {
+    background: #007bff;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Left Section */
+.footer-left {
+    text-align: left;
+}
+
+.footer-left h2 {
+    margin-bottom: 8px;
+    font-size: 1.8rem;
+}
+
+.footer-left p {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* Links Section */
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin: 15px 0;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: 0.3s;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+    opacity: 0.8;
+}
+
+/* Social Media Icons */
+.footer-social {
+    display: flex;
+    gap: 15px;
+}
+
+.footer-social a {
+    color: white;
+    font-size: 1.4rem;
+    transition: 0.3s;
+}
+
+.footer-social a:hover {
+    color: #ffcc00;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-left {
+        text-align: center;
+    }
+
+    .footer-links {
+        flex-direction: column;
+    }
+
+    .footer-social {
+        justify-content: center;
+        margin-top: 15px;
+    }
+}
+
+    </style>
+</head>
+<body>
+
+   
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="{% url 'booking:dashboard' %}" class="logo">
+                <i class="fas fa-bus"></i> Amigo Travels
+            </a>
+        </div>
+        
+        
+
+        <ul class="nav-links">
+            <li><a href="{% url 'booking:dashboard' %}"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="{% url 'booking:about' %}"><i class="fas fa-info-circle"></i> About Us</a></li>
+            <li><a href="{% url 'booking:booking_history' %}"><i class="fas fa-history"></i> Booking History</a></li>
+            <li><a href="{% url 'booking:contact' %}"><i class="fas fa-envelope"></i> Contact Us</a></li>
+            <li><a href="{% url 'booking:logout' %}" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <div class="dashboard-box">
+            <h1>Welcome to Your Dashboard</h1>
+            <p class="welcome-msg">Hello, {{ user.username }}! Glad to have you back.</p>
+            <p>Manage your bookings & explore our services.</p>
+            <a href="{% url 'booking:booking' %}" class="book-btn">
+                <i class="fas fa-ticket-alt"></i> Book Your Journey
+            </a>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-left">
+                <h2>Amigo Travels</h2>
+                <p>&copy; 2025 Amigo Travels. All Rights Reserved.</p>
+            </div>
+    
+            <div class="footer-links">
+             
+                
+                <a href="{% url 'booking:faq' %}"><i class="fas fa-question-circle"></i> FAQ</a>
+                <a href="{% url 'booking:help_center' %}"><i class="fas fa-hands-helping"></i> Help Center</a>
+                <a href="{% url 'booking:privacy_policy' %}"><i class="fas fa-lock"></i> Privacy Policy</a>
+                <a href="{% url 'booking:terms_of_service' %}"><i class="fas fa-file-contract"></i> Terms of Service</a>
+            </div>
+    
+            <div class="footer-social">
+                <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </footer>  
+    <script>
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

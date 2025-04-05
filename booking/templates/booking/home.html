@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Reservation</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <h1>Welcome to Online Bus Reservation</h1>
+    <table>
+        <tr>
+            <th>Bus Name</th>
+            <th>Source</th>
+            <th>Destination</th>
+            <th>Seats Available</th>
+            <th>Price</th>
+            <th>Book</th>
+        </tr>
+        {% for bus in buses %}
+        <tr>
+            <td>{{ bus.name }}</td>
+            <td>{{ bus.source }}</td>
+            <td>{{ bus.destination }}</td>
+            <td>{{ bus.available_seats }}</td>
+            <td>{{ bus.price }}</td>
+            <td><a href="{% url 'book_seat' bus.id %}">Book Now</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
