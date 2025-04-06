@@ -93,22 +93,75 @@ def booking_page(request):
     return render(request, 'booking/booking_page.html', {'buses': buses, 'sources': unique_sources, 'destinations':unique_destination})
 
 
+# def confirm_booking(request):
+#     if request.method == 'POST':
+#         # Store form data in session
+#         request.session['booking_data'] = {
+#             'from': request.POST.get('from'),
+#             'to': request.POST.get('to'),
+            
+#             'date': request.POST.get('date'),
+#             'passengers': request.POST.get('passengers'),
+#             'seattype': request.POST.get('seattype'),
+#             'total_amount': request.POST.get('total_amount').replace('₹', ''),
+#         }
+#         # Render the confirmation page directly
+#         return render(request, 'booking/confirm_booking.html', {
+#             'booking_data': request.session['booking_data'],
+#         })
+#     return redirect('booking_page')
+
+@login_required
 def confirm_booking(request):
     if request.method == 'POST':
-        # Store form data in session
-        request.session['booking_data'] = {
-            'from': request.POST.get('from'),
-            'to': request.POST.get('to'),
-            
-            'date': request.POST.get('date'),
-            'passengers': request.POST.get('passengers'),
-            'seattype': request.POST.get('seattype'),
-            'total_amount': request.POST.get('total_amount').replace('₹', ''),
-        }
-        # Render the confirmation page directly
-        return render(request, 'booking/confirm_booking.html', {
-            'booking_data': request.session['booking_data'],
-        })
+        from_city = request.POST.get('from')
+        to_city = request.POST.get('to')
+        date = request.POST.get('date')
+        passengers = int(request.POST.get('passengers'))
+        seattype = request.POST.get('seattype')
+        total_amount = Decimal(request.POST.get('total_amount').replace('₹', ''))
+
+        bus = Bus.objects.filter(source=from_city, destination=to_city).first()
+
+        if bus:
+            if bus.available_seats >= passengers:
+                bus.available_seats -= passengers
+                bus.save()
+
+                booking = Booking.objects.create(
+                    user=request.user,
+                    bus=bus,
+                    seats_booked=passengers,
+                    amount_paid=total_amount,
+                    payment_status=True
+                )
+
+                request.session['booking_data'] = {
+                    'from': from_city,
+                    'to': to_city,
+                    'date': date,
+                    'passengers': passengers,
+                    'seattype': seattype,
+                    'total_amount': str(total_amount),
+                    'bus_name': bus.name,
+                    'departure_time': bus.departure_time.strftime("%I:%M %p"),
+                    'arrival_time': bus.arrival_time.strftime("%I:%M %p"),
+                }
+
+                return render(request, 'booking/confirm_booking.html', {
+                    'booking_data': request.session['booking_data'],
+                })
+            else:
+                return render(request, 'booking/booking_page.html', {
+                    'error': 'Not enough seats available for this bus.',
+                    'bus': Bus.objects.all()
+                })
+        else:
+            return render(request, 'booking/booking_page.html', {
+                'error': 'No matching bus found for selected route.',
+                'bus': Bus.objects.all()
+            })
+
     return redirect('booking_page')
 
 # views.py

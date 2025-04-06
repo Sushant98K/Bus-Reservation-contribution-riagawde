@@ -107,12 +107,28 @@
                 <label for="from">From</label>
                 <input type="text" class="form-control" id="from" name="from" placeholder="Enter departure city" required>
             </div> {% endcomment %}
-            <div class="form-group">
+            {% comment %} <div class="form-group">
                 <label for="from">From</label>
                 <select name="from" id="from" class="form-control" required>
                     <option value="" disabled selected>Select departure city</option>
                     {% for city in sources %}
                         <option value="{{ city.source }}">{{ city.source }} - {{ city.departure_time|date:"h:i A" }}</option>
+                    {% endfor %}
+                </select>
+            </div> {% endcomment %}
+            <div class="form-group">
+                <label for="from">From</label>
+                <select name="from" id="from" class="form-control" required>
+                    <option value="" disabled selected>Select departure city</option>
+                    {% for city in sources %}
+                        {% for bus in buses %}
+                            {% if bus.source == city.source and bus.departure_time == city.departure_time %}
+                                <option value="{{ city.source }}">
+                                    {{ city.source }} - {{ city.departure_time|date:"h:i A" }} |
+                                    Seats: {{ bus.available_seats }}/{{ bus.total_seats }}
+                                </option>
+                            {% endif %}
+                        {% endfor %}
                     {% endfor %}
                 </select>
             </div>
@@ -153,7 +169,6 @@
                 <label for="passengers">Passengers</label>
                 <div class="col-sm-8">
                     <input type="number" class="form-control" id="passengers" name="passengers" min="1" placeholder="Number of passengers" required>
-                    <div id="emailHelp" class="form-text">asdasd</div>
                 </div>
             </div>
     
